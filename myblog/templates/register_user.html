@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        <p>Postoji problem sa tvojom formom:</p>
+        <ul>
+            {% for field in form %}
+                {% if field.errors %}
+                    <li>{{ field.label_tag }}: {{ field.errors }}</li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    <h1>Register</h1>
+
+    <form action="{% url 'register_user' %}" method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Submit" class="btn btn-secondary">
+    </form>
+
+
+
+
+{% endblock %}
+
+
